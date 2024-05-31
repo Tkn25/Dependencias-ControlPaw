@@ -1,8 +1,43 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 31-05-2024 a las 15:13:23
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `veterinario`
 --
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
+  `tipo` int(11) DEFAULT NULL,
+  `usuario` varchar(64) DEFAULT NULL,
+  `contraseña` varchar(64) DEFAULT NULL,
+  `DNI` varchar(9) DEFAULT NULL,
+  `nombre` varchar(64) DEFAULT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  `direccion` varchar(96) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `cliente`
 --
@@ -18,9 +53,22 @@ INSERT INTO `cliente` (`idCliente`, `tipo`, `usuario`, `contraseña`, `DNI`, `no
 (8, 2, 'cliente8@gmail.com', '7b912061d773e3084e6e4b421060dc1df7a99568e0f34fa8760638b9ca38b32a', '87788778B', 'Gabriela Collera Gutierrez', '677174478', 'Tr.ª del Almendro, 3'),
 (9, 2, 'cliente9@gmail.com', 'cd3295318a988f350c0e12cfc27ba59cf069a9c9d4c860bcf3d19a5c1fb61bb3', '12345678K', 'Hernán Cortés de Monroy', '699499299', 'C. de Mira el Río Alta, 12'),
 (10, 2, 'cliente10@gmail.com', '8ae0cbf1b336987081cd7d86fd83ef02d872db9808bef06601fffd4bdb4edfc9', '87654321S', 'Elena Nito del Bosque', '666123123', 'C. Poca Sangre, 5'),
-(13, 2, 'test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', '00000000L', 'test', '111111111', 'test');
+(13, 2, 'test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', '00000000L', 'test', '111111111', 'test'),
+(15, 2, 'test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', '11111111L', 'asd', '111111111', 'test');
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `consejo`
+--
+
+CREATE TABLE `consejo` (
+  `idConsejo` int(11) NOT NULL,
+  `titulo` varchar(128) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
+  `img` varchar(1024) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `consejo`
 --
@@ -29,19 +77,30 @@ INSERT INTO `consejo` (`idConsejo`, `titulo`, `descripcion`, `img`) VALUES
 (1, 'TITULO DEL CONSEJO', 'ESTO ES UNA DESCRIPCIÓN DE PRUEBA PARA EL APARTADO DE CONSEJOS DE CONTROLPAW', 'https://i.imgur.com/Hh6Mayx.jpeg'),
 (2, 'TITULO TEST2', 'ESTO ES UNA DESCRIPCIÓN DE PRUEBA PARA EL APARTADO DE CONSEJOS DE CONTROLPAW 2', ''),
 (7, 'a', 'a', ''),
-(8, 'prueba', 'prueba', 'https://i.imgur.com/dbqTF54.png');
+(8, 'prueba', 'prueba', 'https://i.imgur.com/dbqTF54.png'),
+(9, 'asss', 'asss', '');
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `consulta`
+--
+
+CREATE TABLE `consulta` (
+  `idConsulta` int(11) NOT NULL,
+  `titulo` varchar(32) DEFAULT NULL,
+  `idMascota` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `consulta`
 --
 
 INSERT INTO `consulta` (`idConsulta`, `titulo`, `idMascota`, `fecha`) VALUES
-(3, 'Chequeo anual', 5, '2024-03-10'),
 (4, 'Desparasitación', 2, '2024-03-12'),
 (5, 'Revisión de salud', 9, '2024-03-15'),
 (6, 'Vacunación', 7, '2024-03-18'),
-(7, 'Control de peso', 1, '2024-06-01'),
 (8, 'Chequeo anual', 6, '2024-03-22'),
 (9, 'Desparasitación', 10, '2024-03-25'),
 (10, 'Revisión de salud', 4, '2024-03-28'),
@@ -53,12 +112,26 @@ INSERT INTO `consulta` (`idConsulta`, `titulo`, `idMascota`, `fecha`) VALUES
 (16, 'Vacunación', 5, '2024-04-18'),
 (17, 'Control de peso', 4, '2024-04-20'),
 (18, 'Chequeo anual', 7, '2024-04-22'),
-(19, 'Desparasitación', 1, '2024-04-25'),
 (20, 'Revisión de salud', 10, '2024-04-28'),
 (24, 'prueba', 10, '2024-12-12'),
-(25, 'test', 4, '2024-12-12');
+(25, 'test', 4, '2024-12-12'),
+(26, 'asd', 2, '2024-12-12');
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleado`
+--
+
+CREATE TABLE `empleado` (
+  `idEmpleado` int(11) NOT NULL,
+  `tipo` int(11) DEFAULT NULL,
+  `usuario` varchar(64) DEFAULT NULL,
+  `contraseña` varchar(64) DEFAULT NULL,
+  `numeroColegiado` varchar(9) DEFAULT NULL,
+  `nombre` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `empleado`
 --
@@ -70,12 +143,72 @@ INSERT INTO `empleado` (`idEmpleado`, `tipo`, `usuario`, `contraseña`, `numeroC
 (4, 1, 'test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'test', 'test');
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `especie`
+--
+
+CREATE TABLE `especie` (
+  `idEspecie` int(11) NOT NULL,
+  `nombre` varchar(32) DEFAULT NULL,
+  `tipo` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `especie`
+--
+
+INSERT INTO `especie` (`idEspecie`, `nombre`, `tipo`) VALUES
+(1, 'Perro', 'Mamífero'),
+(2, 'Gato', 'Mamífero'),
+(3, 'Hurón', 'Mamífero'),
+(4, 'Hámster', 'Mamífero');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `genero`
+--
+
+CREATE TABLE `genero` (
+  `idGenero` int(11) NOT NULL,
+  `genero` varchar(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`idGenero`, `genero`) VALUES
+(1, 'Macho'),
+(2, 'Hembra');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mascotas`
+--
+
+CREATE TABLE `mascotas` (
+  `idMascota` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `raza` varchar(50) DEFAULT NULL,
+  `idDueño` int(11) DEFAULT NULL,
+  `idGenero` int(11) DEFAULT NULL,
+  `idEspecie` int(11) DEFAULT NULL,
+  `peso` float DEFAULT NULL,
+  `castrado` tinyint(1) DEFAULT NULL,
+  `fechaNacimiento` date DEFAULT NULL,
+  `microchip` varchar(15) DEFAULT NULL,
+  `enfermedad` tinyint(1) DEFAULT NULL,
+  `baja` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
 INSERT INTO `mascotas` (`idMascota`, `nombre`, `raza`, `idDueño`, `idGenero`, `idEspecie`, `peso`, `castrado`, `fechaNacimiento`, `microchip`, `enfermedad`, `baja`) VALUES
-(1, 'Spi', 'Golden Retriever', 1, 1, 1, 10, 0, '2019-05-15', '978000000000001', 0, 0),
 (2, 'Pichon', 'Siamese', 2, 1, 2, 8, 0, '2020-02-20', '978000000000002', 0, 0),
 (3, 'Nala', 'Labrador', 3, 2, 1, 15, 0, '2018-10-10', '978000000000003', 0, 0),
 (4, 'Nicolas', 'Persian', 4, 1, 2, 7, 0, '2017-07-01', '978000000000004', 1, 0),
@@ -85,38 +218,234 @@ INSERT INTO `mascotas` (`idMascota`, `nombre`, `raza`, `idDueño`, `idGenero`, `
 (8, 'Tribi', 'Pug', 8, 1, 1, 14, 0, '2016-04-30', '978000000000008', 0, 0),
 (9, 'Patt', 'Chihuahua', 9, 2, 3, 3, 0, '2022-02-28', '978000000000009', 0, 0),
 (10, 'Kennen', 'Syrian', 10, 1, 4, 1, 0, '2023-03-15', '978000000000010', 1, 0),
-(11, 'prueba', 'prueba', 13, 1, 1, 20, 1, '2024-04-04', '', 0, 0);
+(11, 'prueba', 'prueba2', 13, 1, 1, 20, 1, '2024-04-04', '', 0, 0),
+(12, 'pruebaaa', 'asdd', 2, 1, 1, 10, 1, '2020-12-12', '', 0, 0);
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `seguimiento`
+--
+
+CREATE TABLE `seguimiento` (
+  `idSeguimiento` int(11) NOT NULL,
+  `idMascota` int(11) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `img` varchar(1024) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `seguimiento`
 --
 
 INSERT INTO `seguimiento` (`idSeguimiento`, `idMascota`, `descripcion`, `fecha`, `img`) VALUES
-(1, 1, 'test', '2024-06-06', 'imgur.com'),
 (4, 6, 'test', '2024-05-05', 'null'),
-(9, 1, 'test', '2024-12-12', NULL),
-(10, 8, 'test', '2024-12-12', '');
+(10, 8, 'test', '2024-12-12', ''),
+(12, 2, 'ass', '2024-12-12', '');
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tratamiento`
+--
+
+CREATE TABLE `tratamiento` (
+  `idTratamiento` int(11) NOT NULL,
+  `idMascota` int(11) DEFAULT NULL,
+  `descripcion` varchar(64) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `finalizado` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `tratamiento`
 --
 
 INSERT INTO `tratamiento` (`idTratamiento`, `idMascota`, `descripcion`, `fecha`, `finalizado`) VALUES
 (1, 4, 'Vacunación contra la rabia', '2024-04-03', 1),
-(2, 1, 'Desparasitación interna', '2024-03-30', 0),
 (3, 3, 'Control de peso', '2024-03-28', 1),
 (4, 5, 'Extracción de sarro dental', '2024-03-25', 0),
 (5, 7, 'Cirugía de esterilización', '2024-03-20', 1),
 (6, 9, 'Tratamiento para la otitis', '2024-03-18', 1),
-(7, 1, 'Revisión anual', '2024-03-15', 1),
 (8, 2, 'Tratamiento para dermatitis', '2024-03-10', 1),
 (9, 3, 'Radiografía de control', '2024-03-08', 1),
-(10, 1, 'Cirugía de fractura', '2024-03-05', 1),
 (11, 6, 'Control de diabetes', '2024-03-01', 1),
 (12, 7, 'Tratamiento para la artritis', '2024-02-28', 1),
 (13, 8, 'Vacunación múltiple', '2024-02-25', 1),
 (14, 9, 'Desparasitación externa', '2024-02-20', 1),
 (15, 10, 'Control de presión arterial', '2024-02-18', 1),
-(27, 6, 'test', '2024-12-12', 0);
+(27, 6, 'test', '2024-12-12', 0),
+(28, 2, 'asss', '2024-12-12', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usertype`
+--
+
+CREATE TABLE `usertype` (
+  `idUsertype` int(11) NOT NULL,
+  `descripcion` varchar(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usertype`
+--
+
+INSERT INTO `usertype` (`idUsertype`, `descripcion`) VALUES
+(1, 'Veterinario'),
+(2, 'Cliente');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`),
+  ADD KEY `tipo` (`tipo`);
+
+--
+-- Indices de la tabla `consejo`
+--
+ALTER TABLE `consejo`
+  ADD PRIMARY KEY (`idConsejo`);
+
+--
+-- Indices de la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  ADD PRIMARY KEY (`idConsulta`),
+  ADD KEY `idMascota` (`idMascota`);
+
+--
+-- Indices de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD PRIMARY KEY (`idEmpleado`),
+  ADD KEY `tipo` (`tipo`);
+
+--
+-- Indices de la tabla `especie`
+--
+ALTER TABLE `especie`
+  ADD PRIMARY KEY (`idEspecie`);
+
+--
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`idGenero`);
+
+--
+-- Indices de la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  ADD PRIMARY KEY (`idMascota`),
+  ADD KEY `idEspecie` (`idEspecie`),
+  ADD KEY `idDueño` (`idDueño`),
+  ADD KEY `idGenero` (`idGenero`);
+
+--
+-- Indices de la tabla `seguimiento`
+--
+ALTER TABLE `seguimiento`
+  ADD PRIMARY KEY (`idSeguimiento`),
+  ADD KEY `idMascota` (`idMascota`);
+
+--
+-- Indices de la tabla `tratamiento`
+--
+ALTER TABLE `tratamiento`
+  ADD PRIMARY KEY (`idTratamiento`),
+  ADD KEY `idMascota` (`idMascota`);
+
+--
+-- Indices de la tabla `usertype`
+--
+ALTER TABLE `usertype`
+  ADD PRIMARY KEY (`idUsertype`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `consejo`
+--
+ALTER TABLE `consejo`
+  MODIFY `idConsejo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  MODIFY `idConsulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de la tabla `seguimiento`
+--
+ALTER TABLE `seguimiento`
+  MODIFY `idSeguimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `tratamiento`
+--
+ALTER TABLE `tratamiento`
+  MODIFY `idTratamiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`tipo`) REFERENCES `usertype` (`idUsertype`);
+
+--
+-- Filtros para la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`idMascota`) REFERENCES `mascotas` (`idMascota`);
+
+--
+-- Filtros para la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`tipo`) REFERENCES `usertype` (`idUsertype`);
+
+--
+-- Filtros para la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`),
+  ADD CONSTRAINT `mascotas_ibfk_2` FOREIGN KEY (`idDueño`) REFERENCES `cliente` (`idCliente`),
+  ADD CONSTRAINT `mascotas_ibfk_3` FOREIGN KEY (`idGenero`) REFERENCES `genero` (`idGenero`);
+
+--
+-- Filtros para la tabla `seguimiento`
+--
+ALTER TABLE `seguimiento`
+  ADD CONSTRAINT `seguimiento_ibfk_1` FOREIGN KEY (`idMascota`) REFERENCES `mascotas` (`idMascota`);
+
+--
+-- Filtros para la tabla `tratamiento`
+--
+ALTER TABLE `tratamiento`
+  ADD CONSTRAINT `tratamiento_ibfk_1` FOREIGN KEY (`idMascota`) REFERENCES `mascotas` (`idMascota`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
